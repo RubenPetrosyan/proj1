@@ -1,0 +1,356 @@
+/* ===============================
+   MODERN BASE / RESET (2025–2026 style)
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.5;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0 0 1rem 0;
+}
+
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===============================
+   CONTAINER & TYPOGRAPHY
+================================ */
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 25px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    color: #1e2a38;
+    font-weight: 600;
+}
+
+/* ===============================
+   SECTIONS
+================================ */
+
+.section {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #1e2a38;
+}
+
+/* ===============================
+   LABELS & FORM ELEMENTS
+================================ */
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e2a38;
+}
+
+label input,
+label select {
+    margin-top: 6px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* Visual validation feedback */
+input:required:invalid:not(:placeholder-shown):not(:focus),
+select:required:invalid:not(:focus) {
+    border-color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.04);
+}
+
+/* Hide spinner arrows on number inputs – cross-browser 2026 style */
+input[type="number"] {
+    -moz-appearance: textfield;     /* Firefox – still required */
+    appearance: textfield;          /* Emerging standard (works in newer Firefox/Chrome/Edge) */
+}
+
+/* WebKit/Blink browsers (Chrome, Edge, Safari, Opera) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Radio buttons – modern accent color */
+input[type="radio"] {
+    accent-color: #007bff;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder {
+    color: #a0a0a0;
+    opacity: 1;
+}
+
+/* ===============================
+   FLEX GRID
+================================ */
+
+.flex {
+    display: flex;
+    gap: 20px;
+}
+
+.flex > div {
+    flex: 1;
+}
+
+/* ===============================
+   DYNAMIC CARDS
+================================ */
+
+.card {
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.card:hover {
+    background-color: #f1f5ff;
+    border-color: #c0d4ff;
+}
+
+.card > * {
+    margin-bottom: 18px;
+}
+
+.card > *:last-child {
+    margin-bottom: 0;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button[type="button"] {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+button[type="button"]:hover {
+    background-color: #1e7e34;
+}
+
+#addDriverBtn,
+#addTruckBtn,
+#addTrailerBtn,
+#addCargoBtn {
+    padding: 12px 24px;
+    font-size: 15px;
+    margin: 15px 0 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 14px;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #dc3545;
+    color: #ffffff;
+    padding: 6px 14px;
+    font-size: 13px;
+    z-index: 1;
+}
+
+.remove-btn:hover {
+    background-color: #a71d2a;
+}
+
+/* ===============================
+   COVERAGE SECTION
+================================ */
+
+.coverage-row {
+    border-bottom: 1px solid #eaeaea;
+    padding: 18px 0;
+    margin-bottom: 12px;
+}
+
+.coverage-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.coverage-row strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #1e2a38;
+}
+
+.coverage-row label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 24px;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.coverage-fields {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f8f9fc;
+    border-radius: 6px;
+    border: 1px solid #e1e5ee;
+    display: none;
+}
+
+.coverage-fields .flex {
+    gap: 20px;
+}
+
+/* ===============================
+   CARGO TOTAL INDICATOR
+================================ */
+
+.total-indicator {
+    font-weight: 700;
+    font-size: 16px;
+    text-align: right;
+    padding: 12px 0;
+    margin-top: 12px;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .flex {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .section {
+        padding: 18px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    .remove-btn {
+        position: static;
+        display: block;
+        margin-top: 12px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .card {
+        padding: 16px;
+    }
+}

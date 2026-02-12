@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truck Insurance Questionnaire</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Truck Insurance Questionnaire</h1>
+
+    <form action="https://formsubmit.co/ruben@50bridges.com" method="POST" id="mainForm">
+
+        <!-- Hidden fields for FormSubmit configuration -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="New Truck Insurance Submission">
+
+        <!-- ================= INSURED INFORMATION ================= -->
+        <div class="section">
+            <h2>Insured Information</h2>
+
+            <label>Named Insured
+                <input name="Named Insured" placeholder="Named Insured" required>
+            </label>
+
+            <label>Contact Person
+                <input name="Contact Person" placeholder="Contact Person" required>
+            </label>
+
+            <div class="flex">
+                <div>
+                    <label>Phone
+                        <input name="Phone" placeholder="Phone" required>
+                    </label>
+                </div>
+                <div>
+                    <label>Email
+                        <input type="email" name="Email" placeholder="Email" required>
+                    </label>
+                </div>
+            </div>
+
+            <label>Legal Status
+                <select name="Legal Status" required>
+                    <option value="">Select Legal Status</option>
+                    <option>Corporation</option>
+                    <option>LLC</option>
+                    <option>Sole Proprietor</option>
+                    <option>Partnership</option>
+                    <option>Individual</option>
+                </select>
+            </label>
+
+            <div class="flex">
+                <div>
+                    <label>MC#
+                        <input name="MC#" placeholder="MC#">
+                    </label>
+                </div>
+                <div>
+                    <label>DOT#
+                        <input name="DOT#" placeholder="DOT#">
+                    </label>
+                </div>
+            </div>
+
+            <label>ELD Provider
+                <input name="ELD Provider" placeholder="ELD Provider">
+            </label>
+        </div>
+
+        <!-- ================= DRIVERS ================= -->
+        <div class="section">
+            <h2>Driver / Owner Information</h2>
+            <div id="drivers"></div>
+            <button type="button" id="addDriverBtn">+ Add Driver</button>
+        </div>
+
+        <!-- ================= TRUCKS ================= -->
+        <div class="section">
+            <h2>Truck Information</h2>
+            <div id="trucks"></div>
+            <button type="button" id="addTruckBtn">+ Add Truck</button>
+        </div>
+
+        <!-- ================= TRAILERS ================= -->
+        <div class="section">
+            <h2>Trailer Information</h2>
+            <div id="trailers"></div>
+            <button type="button" id="addTrailerBtn">+ Add Trailer</button>
+        </div>
+
+        <!-- ================= CARGO ================= -->
+        <div class="section">
+            <h2>Cargo Information</h2>
+            <div id="cargo"></div>
+            <button type="button" id="addCargoBtn">+ Add Commodity</button>
+            <p class="total-indicator" id="cargoTotal" aria-live="polite">Total: 0%</p>
+        </div>
+
+        <!-- ================= COVERAGE ================= -->
+        <div class="section">
+            <h2>Coverage & Limits Requested</h2>
+            <div id="coverages"></div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn">Submit Application</button>
+
+    </form>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
