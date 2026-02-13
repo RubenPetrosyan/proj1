@@ -24,86 +24,100 @@
         <div class="section">
             <h2>Insured Information</h2>
 
+            <!-- Named Insured full width -->
             <label>
                 Named Insured *
                 <input name="Named Insured" required>
             </label>
 
-            <div class="flex">
-                <div>
-                    <label>
-                        Phone *
-                        <input name="Phone" required>
-                    </label>
-                </div>
+            <!-- Compact Row -->
+            <div class="insured-row">
 
-                <div>
-                    <label>
-                        Email *
-                        <input type="email" name="Email" required>
-                    </label>
-                </div>
+                <label>
+                    Phone *
+                    <input name="Phone" required>
+                </label>
 
-                <div>
-                    <label>
-                        DOT# *
-                        <input name="DOT#" required>
-                    </label>
-                </div>
+                <label>
+                    Email *
+                    <input type="email" name="Email" required>
+                </label>
+
+                <label>
+                    DOT# *
+                    <input name="DOT#" required>
+                </label>
+
+                <label class="short-field">
+                    Legal Status
+                    <select name="Legal Status">
+                        <option value="">Select</option>
+                        <option>Corporation</option>
+                        <option>LLC</option>
+                        <option>Sole Proprietor</option>
+                        <option>Partnership</option>
+                        <option>Individual</option>
+                    </select>
+                </label>
+
+                <label class="short-field">
+                    ELD Provider
+                    <input name="ELD Provider">
+                </label>
+
             </div>
-
-            <label>
-                Legal Status
-                <select name="Legal Status">
-                    <option value="">Select</option>
-                    <option>Corporation</option>
-                    <option>LLC</option>
-                    <option>Sole Proprietor</option>
-                    <option>Partnership</option>
-                    <option>Individual</option>
-                </select>
-            </label>
-
-            <label>
-                ELD Provider
-                <input name="ELD Provider">
-            </label>
         </div>
 
         <!-- ================= DRIVERS ================= -->
         <div class="section">
-            <h2>Drivers / Owners</h2>
+
+            <div class="section-header">
+                <h2>Drivers / Owners</h2>
+                <button type="button" id="addDriverBtn" class="inline-add-btn">
+                    + Add Driver
+                </button>
+            </div>
 
             <div id="drivers" class="items-container"></div>
-
-            <button type="button" id="addDriverBtn">+ Add Driver</button>
         </div>
 
         <!-- ================= TRUCKS ================= -->
         <div class="section">
-            <h2>Trucks</h2>
+
+            <div class="section-header">
+                <h2>Trucks</h2>
+                <button type="button" id="addTruckBtn" class="inline-add-btn">
+                    + Add Truck
+                </button>
+            </div>
 
             <div id="trucks" class="items-container"></div>
-
-            <button type="button" id="addTruckBtn">+ Add Truck</button>
         </div>
 
         <!-- ================= TRAILERS ================= -->
         <div class="section">
-            <h2>Trailers</h2>
+
+            <div class="section-header">
+                <h2>Trailers</h2>
+                <button type="button" id="addTrailerBtn" class="inline-add-btn">
+                    + Add Trailer
+                </button>
+            </div>
 
             <div id="trailers" class="items-container"></div>
-
-            <button type="button" id="addTrailerBtn">+ Add Trailer</button>
         </div>
 
         <!-- ================= CARGO ================= -->
         <div class="section">
-            <h2>Cargo</h2>
+
+            <div class="section-header">
+                <h2>Cargo</h2>
+                <button type="button" id="addCargoBtn" class="inline-add-btn">
+                    + Add Commodity
+                </button>
+            </div>
 
             <div id="cargo" class="items-container"></div>
-
-            <button type="button" id="addCargoBtn">+ Add Commodity</button>
 
             <p class="total-indicator" id="cargoTotal">Total: 0%</p>
         </div>
@@ -112,7 +126,9 @@
         <div class="section">
             <h2>Coverage & Limits Requested</h2>
 
-            <div id="coverages"></div>
+            <div id="coverages" class="coverage-grid">
+                <!-- JS will populate -->
+            </div>
         </div>
 
         <button type="submit" class="submit-btn">

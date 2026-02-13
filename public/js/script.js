@@ -1,5 +1,5 @@
 // ==========================================
-// TRUCK INSURANCE QUESTIONNAIRE (Compact)
+// TRUCK INSURANCE QUESTIONNAIRE
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -40,7 +40,7 @@ function addDriver() {
     row.className = "row-item";
 
     row.innerHTML = `
-        <label class="w-type">Driver Type
+        <label class="w-type">Type
             <select name="Driver Type" onchange="handleOwnerSelection(this)">
                 <option value="Driver" selected>Driver</option>
                 <option value="Owner">Owner</option>
@@ -60,7 +60,8 @@ function addDriver() {
         </label>
 
         <label class="w-state">State
-            <input name="License State" maxlength="2" placeholder="ST" oninput="this.value = this.value.toUpperCase()">
+            <input name="License State" maxlength="2" placeholder="ST"
+                oninput="this.value = this.value.toUpperCase()">
         </label>
 
         <label class="w-date">Hired
@@ -128,11 +129,11 @@ function addTruck() {
 
     row.innerHTML = `
         <label class="w-year">Year
-            <input type="number" name="Truck Year" placeholder="Year">
+            <input type="number" name="Truck Year">
         </label>
 
         <label class="w-make">Make
-            <input name="Truck Make" placeholder="Make">
+            <input name="Truck Make">
         </label>
 
         <label class="w-trucktype">Type
@@ -148,11 +149,11 @@ function addTruck() {
         </label>
 
         <label class="w-gvw">GVW
-            <input type="number" name="GVW" placeholder="GVW">
+            <input type="number" name="GVW">
         </label>
 
         <label class="w-vin">VIN
-            <input name="Truck VIN" placeholder="VIN">
+            <input name="Truck VIN">
         </label>
 
         <button type="button" class="remove-btn" onclick="removeItem(this)">
@@ -175,11 +176,11 @@ function addTrailer() {
 
     row.innerHTML = `
         <label class="w-year">Year
-            <input type="number" name="Trailer Year" placeholder="Year">
+            <input type="number" name="Trailer Year">
         </label>
 
         <label class="w-make">Make
-            <input name="Trailer Make" placeholder="Make">
+            <input name="Trailer Make">
         </label>
 
         <label class="w-trucktype">Type
@@ -194,7 +195,7 @@ function addTrailer() {
         </label>
 
         <label class="w-vin">VIN
-            <input name="Trailer VIN" placeholder="VIN">
+            <input name="Trailer VIN">
         </label>
 
         <button type="button" class="remove-btn" onclick="removeItem(this)">
@@ -217,13 +218,12 @@ function addCargo() {
 
     row.innerHTML = `
         <label class="w-name">Commodity
-            <input name="Commodity" placeholder="Commodity">
+            <input name="Commodity">
         </label>
 
         <label class="w-year">% 
             <input type="number" name="Commodity Percentage"
                 min="0" max="100"
-                placeholder="%"
                 oninput="updateCargoTotal()">
         </label>
 
@@ -253,17 +253,14 @@ function updateCargoTotal() {
 
     indicator.textContent = `Total: ${total}%`;
 
-    if (total === 100) {
-        indicator.style.color = "#28a745";
-    } else if (total > 100) {
-        indicator.style.color = "#dc3545";
-    } else {
-        indicator.style.color = "#fd7e14";
-    }
+    indicator.style.color =
+        total === 100 ? "#28a745" :
+        total > 100 ? "#dc3545" :
+        "#fd7e14";
 }
 
 // ==========================================
-// COVERAGE
+// COVERAGES (3 PER ROW + REEFER FIX)
 // ==========================================
 const coverageList = [
     "Auto Liability",
@@ -286,29 +283,39 @@ function initializeCoverages() {
         const row = document.createElement("div");
         row.className = "coverage-row";
 
+        const isReefer = name === "Reefer Breakdown";
+
         row.innerHTML = `
             <strong>${name}</strong>
 
-            <label>
-                <input type="radio" name="${name}" value="Yes"
-                    onchange="toggleCoverage(this, '${name}')"> Yes
-            </label>
+            <div class="coverage-options">
+                <label>
+                    <input type="radio" name="${name}" value="Yes"
+                        onchange="toggleCoverage(this, '${name}', ${isReefer})">
+                    Yes
+                </label>
 
-            <label>
-                <input type="radio" name="${name}" value="No" checked
-                    onchange="toggleCoverage(this, '${name}')"> No
-            </label>
+                <label>
+                    <input type="radio" name="${name}" value="No" checked
+                        onchange="toggleCoverage(this, '${name}', ${isReefer})">
+                    No
+                </label>
+            </div>
 
             <div class="coverage-fields" id="${name}-fields">
-                <label>
-                    Limit ($)
-                    <input type="number" name="${name} Limit" min="0">
-                </label>
+
+                ${!isReefer ? `
+                    <label>
+                        Limit ($)
+                        <input type="number" name="${name} Limit" min="0">
+                    </label>
+                ` : ""}
 
                 <label>
                     Deductible ($)
                     <input type="number" name="${name} Deductible" min="0">
                 </label>
+
             </div>
         `;
 

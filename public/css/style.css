@@ -37,9 +37,32 @@ body {
 }
 
 .section h2 {
-    margin: 0 0 18px;
+    margin: 0;
     font-size: 17px;
     color: #1e2a38;
+}
+
+/* =====================================
+   SECTION HEADER (Inline Add Button)
+===================================== */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.inline-add-btn {
+    background: #28a745;
+    color: white;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.inline-add-btn:hover {
+    background: #218838;
 }
 
 /* =====================================
@@ -71,7 +94,7 @@ select:focus {
     outline: none;
 }
 
-/* Number input clean */
+/* Remove number arrows */
 input[type="number"] {
     appearance: textfield;
 }
@@ -82,27 +105,31 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-/* Radio */
 input[type="radio"] {
     accent-color: #007bff;
     margin-right: 6px;
 }
 
 /* =====================================
-   FLEX LAYOUT
+   INSURED INFO (Single Compact Row)
 ===================================== */
-.flex {
+.insured-row {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     flex-wrap: wrap;
+    margin-top: 14px;
 }
 
-.flex > div {
-    flex: 1 1 240px;
+.insured-row label {
+    flex: 1 1 180px;
+}
+
+.short-field {
+    flex: 0 0 150px;
 }
 
 /* =====================================
-   ROW ITEMS (Drivers / Trucks / Trailers)
+   ITEMS (Drivers / Trucks / etc.)
 ===================================== */
 .items-container {
     display: flex;
@@ -112,7 +139,6 @@ input[type="radio"] {
 
 .row-item {
     display: flex;
-    flex-wrap: nowrap;
     gap: 10px;
     align-items: flex-end;
     background: #fafafa;
@@ -122,7 +148,6 @@ input[type="radio"] {
     position: relative;
 }
 
-/* Remove Button */
 .row-item .remove-btn {
     position: absolute;
     top: 8px;
@@ -134,30 +159,24 @@ input[type="radio"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: 0.2s ease;
 }
 
 .row-item .remove-btn:hover {
     background: #c82333;
 }
 
-/* =====================================
-   COMPACT FIELD WIDTH CLASSES
-===================================== */
+/* Compact Width Classes */
+.w-type      { flex: 0 0 110px; }
+.w-name      { flex: 1 1 200px; }
+.w-date      { flex: 0 0 120px; }
+.w-license   { flex: 0 0 140px; }
+.w-state     { flex: 0 0 60px; }
 
-/* Drivers */
-.w-type      { flex: 0 0 120px; }
-.w-name      { flex: 1 1 220px; }
-.w-date      { flex: 0 0 130px; }
-.w-license   { flex: 0 0 150px; }
-.w-state     { flex: 0 0 65px; }
-
-/* Trucks / Trailers */
-.w-year      { flex: 0 0 85px; }
-.w-make      { flex: 1 1 150px; }
-.w-trucktype { flex: 0 0 130px; }
-.w-gvw       { flex: 0 0 120px; }
-.w-vin       { flex: 1 1 240px; }
+.w-year      { flex: 0 0 80px; }
+.w-make      { flex: 1 1 140px; }
+.w-trucktype { flex: 0 0 120px; }
+.w-gvw       { flex: 0 0 110px; }
+.w-vin       { flex: 1 1 200px; }
 
 /* =====================================
    CARGO
@@ -170,56 +189,47 @@ input[type="radio"] {
 }
 
 /* =====================================
-   COVERAGE
+   COVERAGE GRID (3 Per Row)
 ===================================== */
-.coverage-row {
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
+.coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
 }
 
-.coverage-row:last-child {
-    border-bottom: none;
+.coverage-row {
+    border: 1px solid #e5e5e5;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.coverage-row strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.coverage-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
 }
 
 .coverage-fields {
     display: none;
-    flex-wrap: wrap;
-    gap: 14px;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 6px;
+    flex-direction: column;
+    gap: 8px;
     margin-top: 8px;
-}
-
-.coverage-fields label {
-    flex: 0 0 180px;
 }
 
 /* =====================================
    BUTTONS
 ===================================== */
 button {
-    padding: 8px 16px;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
+    border-radius: 6px;
     transition: 0.2s ease;
-}
-
-#addDriverBtn,
-#addTruckBtn,
-#addTrailerBtn,
-#addCargoBtn {
-    background: #28a745;
-    color: white;
-    margin-top: 12px;
-}
-
-#addDriverBtn:hover,
-#addTruckBtn:hover,
-#addTrailerBtn:hover,
-#addCargoBtn:hover {
-    background: #218838;
 }
 
 .submit-btn {
@@ -236,11 +246,11 @@ button {
 }
 
 /* =====================================
-   MOBILE
+   RESPONSIVE
 ===================================== */
-@media (max-width: 992px) {
-    .row-item {
-        flex-wrap: wrap;
+@media (max-width: 1100px) {
+    .coverage-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -250,9 +260,12 @@ button {
         padding: 16px;
     }
 
-    .flex {
+    .insured-row {
         flex-direction: column;
-        gap: 12px;
+    }
+
+    .coverage-grid {
+        grid-template-columns: 1fr;
     }
 
     .row-item {
