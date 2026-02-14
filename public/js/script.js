@@ -2,6 +2,9 @@
 // TRUCK INSURANCE QUESTIONNAIRE
 // ==========================================
 
+let selectedFiles = [];
+const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25MB
+
 document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("addDriverBtn")?.addEventListener("click", addDriver);
@@ -12,13 +15,99 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("mainForm")?.addEventListener("submit", validateForm);
 
     initializeCoverages();
+    initializeFileUpload();
 
-    // Default one row each
+    // Default rows
     addDriver();
     addTruck();
     addTrailer();
     addCargo();
 });
+
+
+// ==========================================
+// FILE UPLOAD LOGIC (Drag & Drop + 25MB)
+// ==========================================
+function initializeFileUpload() {
+
+    const uploadArea = document.getElementById("uploadArea");
+    const fileInput = document.getElementById("fileInput");
+
+    if (!uploadArea || !fileInput) return;
+
+    uploadArea.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", (e) => {
+        handleFiles(e.target.files);
+    });
+
+    uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("dragover");
+    });
+
+    uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("dragover");
+    });
+
+    uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("dragover");
+        handleFiles(e.dataTransfer.files);
+    });
+}
+
+function handleFiles(files) {
+
+    const newFiles = Array.from(files);
+
+    const totalSize =
+        [...selectedFiles, ...newFiles]
+        .reduce((sum, file) => sum + file.size, 0);
+
+    if (totalSize > MAX_TOTAL_SIZE) {
+        alert("Total file size cannot exceed 25MB.");
+        return;
+    }
+
+    selectedFiles = [...selectedFiles, ...newFiles];
+    updateFileInput();
+    renderFileList();
+}
+
+function updateFileInput() {
+    const fileInput = document.getElementById("fileInput");
+    const dataTransfer = new DataTransfer();
+
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    fileInput.files = dataTransfer.files;
+}
+
+function renderFileList() {
+
+    const fileList = document.getElementById("fileList");
+    fileList.innerHTML = "";
+
+    selectedFiles.forEach((file, index) => {
+
+        const div = document.createElement("div");
+        div.className = "file-item";
+
+        div.innerHTML = `
+            <span>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+            <button type="button" onclick="removeFile(${index})">Remove</button>
+        `;
+
+        fileList.appendChild(div);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    updateFileInput();
+    renderFileList();
+}
+
 
 // ==========================================
 // SHARED REMOVE
@@ -26,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function removeItem(button) {
     button.closest(".row-item").remove();
 }
+
 
 // ==========================================
 // DRIVERS (Only 1 Owner Allowed)
@@ -48,7 +138,7 @@ function addDriver() {
         </label>
 
         <label class="w-name">Name
-            <input name="Driver Full Name" placeholder="Name">
+            <input name="Driver Full Name">
         </label>
 
         <label class="w-date">DOB
@@ -56,11 +146,11 @@ function addDriver() {
         </label>
 
         <label class="w-license">License #
-            <input name="License Number" placeholder="License #">
+            <input name="License Number">
         </label>
 
         <label class="w-state">State
-            <input name="License State" maxlength="2" placeholder="ST"
+            <input name="License State" maxlength="2"
                 oninput="this.value = this.value.toUpperCase()">
         </label>
 
@@ -117,6 +207,7 @@ function removeDriver(button) {
     row.remove();
 }
 
+
 // ==========================================
 // TRUCKS
 // ==========================================
@@ -164,6 +255,7 @@ function addTruck() {
     container.appendChild(row);
 }
 
+
 // ==========================================
 // TRAILERS
 // ==========================================
@@ -205,6 +297,7 @@ function addTrailer() {
 
     container.appendChild(row);
 }
+
 
 // ==========================================
 // CARGO
@@ -259,8 +352,9 @@ function updateCargoTotal() {
         "#fd7e14";
 }
 
+
 // ==========================================
-// COVERAGES (3 PER ROW + REEFER FIX)
+// COVERAGES
 // ==========================================
 const coverageList = [
     "Auto Liability",
@@ -291,13 +385,13 @@ function initializeCoverages() {
             <div class="coverage-options">
                 <label>
                     <input type="radio" name="${name}" value="Yes"
-                        onchange="toggleCoverage(this, '${name}', ${isReefer})">
+                        onchange="toggleCoverage(this, '${name}')">
                     Yes
                 </label>
 
                 <label>
                     <input type="radio" name="${name}" value="No" checked
-                        onchange="toggleCoverage(this, '${name}', ${isReefer})">
+                        onchange="toggleCoverage(this, '${name}')">
                     No
                 </label>
             </div>
@@ -335,6 +429,7 @@ function toggleCoverage(radio, name) {
     }
 }
 
+
 // ==========================================
 // FORM VALIDATION
 // ==========================================
@@ -370,6 +465,16 @@ function validateForm(e) {
     if (total !== 100) {
         e.preventDefault();
         alert("Cargo percentages must equal exactly 100%.");
+        return false;
+    }
+
+    // File size validation
+    const totalFileSize = selectedFiles
+        .reduce((sum, file) => sum + file.size, 0);
+
+    if (totalFileSize > MAX_TOTAL_SIZE) {
+        e.preventDefault();
+        alert("Total file size exceeds 25MB limit.");
         return false;
     }
 }

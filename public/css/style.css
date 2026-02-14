@@ -37,7 +37,7 @@ body {
 }
 
 .section h2 {
-    margin: 0;
+    margin: 0 0 14px;
     font-size: 17px;
     color: #1e2a38;
 }
@@ -94,7 +94,6 @@ select:focus {
     outline: none;
 }
 
-/* Remove number arrows */
 input[type="number"] {
     appearance: textfield;
 }
@@ -117,7 +116,6 @@ input[type="radio"] {
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
-    margin-top: 14px;
 }
 
 .insured-row label {
@@ -186,6 +184,70 @@ input[type="radio"] {
     font-size: 14px;
     text-align: right;
     margin-top: 10px;
+}
+
+/* =====================================
+   FILE UPLOAD (Drag & Drop)
+===================================== */
+.upload-area {
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    background: #f8fbff;
+    position: relative;
+    transition: 0.2s ease;
+}
+
+.upload-area.dragover {
+    background: #e9f3ff;
+    border-color: #0056b3;
+}
+
+.upload-area p {
+    margin: 6px 0;
+    font-size: 13px;
+}
+
+.max-size {
+    font-weight: 600;
+    color: #dc3545;
+}
+
+.upload-area input[type="file"] {
+    display: none;
+}
+
+.browse-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 18px;
+    background: #007bff;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.browse-btn:hover {
+    background: #0069d9;
+}
+
+.file-list {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.file-item {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* =====================================
