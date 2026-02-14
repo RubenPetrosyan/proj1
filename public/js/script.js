@@ -4,9 +4,11 @@
 
 let selectedFiles = [];
 const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25MB
+const GEOAPIFY_KEY = "7036f365f5d04562aea31633f8ffd7cc";
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Buttons
     document.getElementById("addDriverBtn")?.addEventListener("click", addDriver);
     document.getElementById("addTruckBtn")?.addEventListener("click", addTruck);
     document.getElementById("addTrailerBtn")?.addEventListener("click", addTrailer);
@@ -16,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initializeCoverages();
     initializeFileUpload();
+    initializeAddressAutocomplete();
 
     // Default rows
     addDriver();
@@ -26,8 +29,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ==========================================
-// FILE UPLOAD LOGIC (Drag & Drop + 25MB)
+// ADDRESS AUTOCOMPLETE (Geoapify)
 // ==========================================
+
+function initializeAddressAutocomplete() {
+    setupAutocomplete("mailingAddress");
+    setupAutocomplete("garagingAddress");
+}
+
+function setupAutocomplete(inputId) {
+
+    const input = document.getElementById(inputId);
+    if (!input) return;
+
+    const wrapper = input.parentElement;
+    wrapper.style.position = "relative";
+
+    const suggestionBox = document.createElement("div");
+    suggestionBox.className = "suggestions-box";
+    wrapper.appendChild(suggestionBox);
+
+    let debounceTimer;
+
+    input.addEventListener("input", function () {
+
+        clearTimeout(debounceTimer);
+
+        const value = input.value.trim();
+        if (value.length < 3) {
+            suggestionBox.innerHTML = "";
+            return;
+        }
+
+        debounceTimer = setTimeout(() => {
+
+            fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value)}&limit=5&filter=countrycode:us&apiKey=${GEOAPIFY_KEY}`)
+                .then(res => res.json())
+                .then(data => {
+
+                    suggestionBox.innerHTML = "";
+
+                    data.features.forEach(feature => {
+
+                        const div = document.createElement("div");
+                        div.className = "suggestion-item";
+                        div.textContent = feature.properties.formatted;
+
+                        div.addEventListener("click", function () {
+                            input.value = feature.properties.formatted;
+                            suggestionBox.innerHTML = "";
+                        });
+
+                        suggestionBox.appendChild(div);
+                    });
+                })
+                .catch(() => {
+                    suggestionBox.innerHTML = "";
+                });
+
+        }, 300); // debounce 300ms
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!wrapper.contains(e.target)) {
+            suggestionBox.innerHTML = "";
+        }
+    });
+}
+
+
+// ==========================================
+// FILE UPLOAD LOGIC
+// ==========================================
+
 function initializeFileUpload() {
 
     const uploadArea = document.getElementById("uploadArea");
@@ -78,7 +152,6 @@ function handleFiles(files) {
 function updateFileInput() {
     const fileInput = document.getElementById("fileInput");
     const dataTransfer = new DataTransfer();
-
     selectedFiles.forEach(file => dataTransfer.items.add(file));
     fileInput.files = dataTransfer.files;
 }
@@ -112,6 +185,7 @@ function removeFile(index) {
 // ==========================================
 // SHARED REMOVE
 // ==========================================
+
 function removeItem(button) {
     button.closest(".row-item").remove();
 }
@@ -120,6 +194,7 @@ function removeItem(button) {
 // ==========================================
 // DRIVERS (Only 1 Owner Allowed)
 // ==========================================
+
 let ownerSelected = false;
 
 function addDriver() {
@@ -211,6 +286,7 @@ function removeDriver(button) {
 // ==========================================
 // TRUCKS
 // ==========================================
+
 function addTruck() {
 
     const container = document.getElementById("trucks");
@@ -259,6 +335,7 @@ function addTruck() {
 // ==========================================
 // TRAILERS
 // ==========================================
+
 function addTrailer() {
 
     const container = document.getElementById("trailers");
@@ -302,6 +379,7 @@ function addTrailer() {
 // ==========================================
 // CARGO
 // ==========================================
+
 function addCargo() {
 
     const container = document.getElementById("cargo");
@@ -356,6 +434,7 @@ function updateCargoTotal() {
 // ==========================================
 // COVERAGES
 // ==========================================
+
 const coverageList = [
     "Auto Liability",
     "Uninsured Motorist",
@@ -433,13 +512,16 @@ function toggleCoverage(radio, name) {
 // ==========================================
 // FORM VALIDATION
 // ==========================================
+
 function validateForm(e) {
 
     const requiredFields = [
         "Named Insured",
         "Phone",
         "Email",
-        "DOT#"
+        "DOT#",
+        "Mailing Address",
+        "Garaging Address"
     ];
 
     let missing = [];

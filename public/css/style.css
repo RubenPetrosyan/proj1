@@ -354,3 +354,43 @@ button {
         flex: 1 1 100%;
     }
 }
+
+/* =====================================
+   ADDRESSES
+===================================== */
+.address-row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.address-row label {
+    position: relative;
+}
+
+/* Autocomplete Suggestions */
+.suggestions-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.suggestion-item {
+    padding: 8px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.suggestion-item:hover {
+    background: #f1f5ff;
+}
