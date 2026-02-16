@@ -1,5 +1,5 @@
 // ==========================================
-// TRUCK INSURANCE QUESTIONNAIRE
+// TRUCK INSURANCE QUESTIONNAIRE (FULL FIXED)
 // ==========================================
 
 let selectedFiles = [];
@@ -8,7 +8,6 @@ const GEOAPIFY_KEY = "7036f365f5d04562aea31633f8ffd7cc";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Buttons
     document.getElementById("addDriverBtn")?.addEventListener("click", addDriver);
     document.getElementById("addTruckBtn")?.addEventListener("click", addTruck);
     document.getElementById("addTrailerBtn")?.addEventListener("click", addTrailer);
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeFileUpload();
     initializeAddressAutocomplete();
 
-    // Default rows
     addDriver();
     addTruck();
     addTrailer();
@@ -29,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ==========================================
-// ADDRESS AUTOCOMPLETE (Geoapify)
+// ADDRESS AUTOCOMPLETE
 // ==========================================
 
 function initializeAddressAutocomplete() {
@@ -83,11 +81,9 @@ function setupAutocomplete(inputId) {
                         suggestionBox.appendChild(div);
                     });
                 })
-                .catch(() => {
-                    suggestionBox.innerHTML = "";
-                });
+                .catch(() => suggestionBox.innerHTML = "");
 
-        }, 300); // debounce 300ms
+        }, 300);
     });
 
     document.addEventListener("click", function (e) {
@@ -99,7 +95,7 @@ function setupAutocomplete(inputId) {
 
 
 // ==========================================
-// FILE UPLOAD LOGIC
+// FILE UPLOAD (FULL FIX)
 // ==========================================
 
 function initializeFileUpload() {
@@ -109,10 +105,9 @@ function initializeFileUpload() {
 
     if (!uploadArea || !fileInput) return;
 
-    uploadArea.addEventListener("click", () => fileInput.click());
-
     fileInput.addEventListener("change", (e) => {
-        handleFiles(e.target.files);
+        addFiles(e.target.files);
+        fileInput.value = "";
     });
 
     uploadArea.addEventListener("dragover", (e) => {
@@ -127,11 +122,11 @@ function initializeFileUpload() {
     uploadArea.addEventListener("drop", (e) => {
         e.preventDefault();
         uploadArea.classList.remove("dragover");
-        handleFiles(e.dataTransfer.files);
+        addFiles(e.dataTransfer.files);
     });
 }
 
-function handleFiles(files) {
+function addFiles(files) {
 
     const newFiles = Array.from(files);
 
@@ -145,15 +140,7 @@ function handleFiles(files) {
     }
 
     selectedFiles = [...selectedFiles, ...newFiles];
-    updateFileInput();
     renderFileList();
-}
-
-function updateFileInput() {
-    const fileInput = document.getElementById("fileInput");
-    const dataTransfer = new DataTransfer();
-    selectedFiles.forEach(file => dataTransfer.items.add(file));
-    fileInput.files = dataTransfer.files;
 }
 
 function renderFileList() {
@@ -177,7 +164,6 @@ function renderFileList() {
 
 function removeFile(index) {
     selectedFiles.splice(index, 1);
-    updateFileInput();
     renderFileList();
 }
 
@@ -192,7 +178,7 @@ function removeItem(button) {
 
 
 // ==========================================
-// DRIVERS (Only 1 Owner Allowed)
+// DRIVERS (ONLY 1 OWNER)
 // ==========================================
 
 let ownerSelected = false;
@@ -510,7 +496,7 @@ function toggleCoverage(radio, name) {
 
 
 // ==========================================
-// FORM VALIDATION
+// FORM VALIDATION + MULTI FILE SUBMIT FIX
 // ==========================================
 
 function validateForm(e) {
@@ -539,7 +525,6 @@ function validateForm(e) {
         return false;
     }
 
-    // Cargo must equal 100%
     let total = 0;
     document.querySelectorAll("input[name='Commodity Percentage']")
         .forEach(i => total += Number(i.value) || 0);
@@ -550,7 +535,6 @@ function validateForm(e) {
         return false;
     }
 
-    // File size validation
     const totalFileSize = selectedFiles
         .reduce((sum, file) => sum + file.size, 0);
 
@@ -559,4 +543,12 @@ function validateForm(e) {
         alert("Total file size exceeds 25MB limit.");
         return false;
     }
+
+    // CRITICAL FIX: Rebuild real file input before submit
+    const fileInput = document.getElementById("fileInput");
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    fileInput.files = dataTransfer.files;
+
+    return true;
 }

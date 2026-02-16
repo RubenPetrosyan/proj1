@@ -20,7 +20,7 @@ body {
 }
 
 /* =====================================
-   CONTAINER & SECTIONS
+   CONTAINER
 ===================================== */
 .container {
     max-width: 1200px;
@@ -28,27 +28,32 @@ body {
     padding: 24px;
 }
 
+/* =====================================
+   SECTIONS
+===================================== */
 .section {
     background: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
 }
 
 .section h2 {
-    margin: 0 0 14px;
-    font-size: 17px;
+    margin: 0 0 16px;
+    font-size: 18px;
     color: #1e2a38;
 }
 
 /* =====================================
-   SECTION HEADER (Inline Add Button)
+   SECTION HEADER
 ===================================== */
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
     margin-bottom: 15px;
 }
 
@@ -71,20 +76,21 @@ body {
 label {
     display: flex;
     flex-direction: column;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     color: #444;
 }
 
 input,
 select {
-    margin-top: 4px;
-    padding: 7px 10px;
+    margin-top: 5px;
+    padding: 10px 12px;
     border: 1px solid #d0d0d0;
-    border-radius: 6px;
-    font-size: 13px;
+    border-radius: 8px;
+    font-size: 14px;
     width: 100%;
     transition: 0.2s ease;
+    min-height: 42px; /* better tap target */
 }
 
 input:focus,
@@ -94,23 +100,14 @@ select:focus {
     outline: none;
 }
 
-input[type="number"] {
-    appearance: textfield;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 input[type="radio"] {
     accent-color: #007bff;
     margin-right: 6px;
+    min-height: auto;
 }
 
 /* =====================================
-   INSURED INFO (Single Compact Row)
+   INSURED ROW
 ===================================== */
 .insured-row {
     display: flex;
@@ -127,75 +124,73 @@ input[type="radio"] {
 }
 
 /* =====================================
-   ITEMS (Drivers / Trucks / etc.)
+   ITEMS (Drivers/Trucks/etc)
 ===================================== */
 .items-container {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
 }
 
 .row-item {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: flex-end;
     background: #fafafa;
     border: 1px solid #e5e5e5;
-    padding: 12px 14px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 10px;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .row-item .remove-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 4px 8px;
-    font-size: 11px;
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
     background: #dc3545;
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 6px;
 }
 
 .row-item .remove-btn:hover {
     background: #c82333;
 }
 
-/* Compact Width Classes */
-.w-type      { flex: 0 0 110px; }
+/* Width Helpers */
+.w-type      { flex: 0 0 120px; }
 .w-name      { flex: 1 1 200px; }
-.w-date      { flex: 0 0 120px; }
-.w-license   { flex: 0 0 140px; }
-.w-state     { flex: 0 0 60px; }
+.w-date      { flex: 0 0 140px; }
+.w-license   { flex: 0 0 160px; }
+.w-state     { flex: 0 0 70px; }
 
-.w-year      { flex: 0 0 80px; }
-.w-make      { flex: 1 1 140px; }
-.w-trucktype { flex: 0 0 120px; }
-.w-gvw       { flex: 0 0 110px; }
-.w-vin       { flex: 1 1 200px; }
+.w-year      { flex: 0 0 90px; }
+.w-make      { flex: 1 1 150px; }
+.w-trucktype { flex: 0 0 140px; }
+.w-gvw       { flex: 0 0 120px; }
+.w-vin       { flex: 1 1 220px; }
 
 /* =====================================
    CARGO
 ===================================== */
 .total-indicator {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 15px;
     text-align: right;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 /* =====================================
-   FILE UPLOAD (Drag & Drop)
+   FILE UPLOAD
 ===================================== */
 .upload-area {
     border: 2px dashed #007bff;
-    border-radius: 10px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 28px 20px;
     text-align: center;
     background: #f8fbff;
-    position: relative;
     transition: 0.2s ease;
 }
 
@@ -206,7 +201,7 @@ input[type="radio"] {
 
 .upload-area p {
     margin: 6px 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .max-size {
@@ -220,14 +215,13 @@ input[type="radio"] {
 
 .browse-btn {
     display: inline-block;
-    margin-top: 10px;
-    padding: 8px 18px;
+    margin-top: 12px;
+    padding: 10px 20px;
     background: #007bff;
     color: #fff;
-    font-size: 13px;
-    border-radius: 6px;
+    font-size: 14px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: 0.2s ease;
 }
 
 .browse-btn:hover {
@@ -235,23 +229,25 @@ input[type="radio"] {
 }
 
 .file-list {
-    margin-top: 15px;
+    margin-top: 16px;
     text-align: left;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .file-item {
     background: #fff;
     border: 1px solid #e5e5e5;
-    padding: 6px 10px;
-    border-radius: 6px;
-    margin-bottom: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 /* =====================================
-   COVERAGE GRID (3 Per Row)
+   COVERAGE GRID
 ===================================== */
 .coverage-grid {
     display: grid;
@@ -261,27 +257,21 @@ input[type="radio"] {
 
 .coverage-row {
     border: 1px solid #e5e5e5;
-    padding: 14px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 10px;
     background: #fafafa;
-}
-
-.coverage-row strong {
-    display: block;
-    margin-bottom: 8px;
 }
 
 .coverage-options {
     display: flex;
-    gap: 12px;
-    margin-bottom: 8px;
+    gap: 16px;
+    margin-bottom: 10px;
 }
 
 .coverage-fields {
     display: none;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 10px;
 }
 
 /* =====================================
@@ -290,7 +280,7 @@ input[type="radio"] {
 button {
     border: none;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: 0.2s ease;
 }
 
@@ -298,9 +288,9 @@ button {
     width: 100%;
     background: #007bff;
     color: white;
-    font-size: 15px;
-    padding: 12px;
-    margin-top: 25px;
+    font-size: 16px;
+    padding: 14px;
+    margin-top: 28px;
 }
 
 .submit-btn:hover {
@@ -308,8 +298,37 @@ button {
 }
 
 /* =====================================
-   RESPONSIVE
+   AUTOCOMPLETE
 ===================================== */
+.suggestions-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.suggestion-item {
+    padding: 10px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background: #f1f5ff;
+}
+
+/* =====================================
+   RESPONSIVE FIXES
+===================================== */
+
 @media (max-width: 1100px) {
     .coverage-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -319,7 +338,7 @@ button {
 @media (max-width: 768px) {
 
     .container {
-        padding: 16px;
+        padding: 14px;
     }
 
     .insured-row {
@@ -333,12 +352,13 @@ button {
     .row-item {
         flex-direction: column;
         align-items: stretch;
+        padding: 18px 14px;
     }
 
     .row-item .remove-btn {
         position: static;
         width: 100%;
-        margin-top: 8px;
+        margin-top: 10px;
     }
 
     .w-type,
@@ -353,44 +373,23 @@ button {
     .w-vin {
         flex: 1 1 100%;
     }
-}
 
-/* =====================================
-   ADDRESSES
-===================================== */
-.address-row {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.address-row label {
-    position: relative;
-}
+    .upload-area {
+        padding: 22px 16px;
+    }
 
-/* Autocomplete Suggestions */
-.suggestions-box {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 1px solid #dcdcdc;
-    border-top: none;
-    border-radius: 0 0 6px 6px;
-    max-height: 220px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-}
+    .browse-btn {
+        width: 100%;
+        text-align: center;
+    }
 
-.suggestion-item {
-    padding: 8px 12px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.15s ease;
-}
-
-.suggestion-item:hover {
-    background: #f1f5ff;
+    .submit-btn {
+        font-size: 17px;
+        padding: 16px;
+    }
 }

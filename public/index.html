@@ -12,6 +12,10 @@
 
     <h1>Truck Insurance Questionnaire</h1>
 
+    <!-- IMPORTANT:
+         - action/method/enctype restored for proper FormSubmit handling
+         - file input name changed to Attachments[] (required for multiple files)
+    -->
     <form action="https://formsubmit.co/ae9cde1290fb998e04fe7ac5287e8765"
           method="POST"
           enctype="multipart/form-data"
@@ -140,8 +144,9 @@
             <h2>Supporting Documents</h2>
 
             <div class="upload-area" id="uploadArea">
+
                 <p>
-                    Here you can upload CDL copies, Loss Runs, IFTAs,
+                    Upload CDL copies, Loss Runs, IFTAs,
                     or handwritten Truck/Trailer/Drivers list.
                 </p>
 
@@ -149,8 +154,12 @@
                     Maximum total file size: 25MB
                 </p>
 
+                <!-- IMPORTANT FIX:
+                     - name changed to Attachments[]
+                     - removed onclick duplication triggers
+                -->
                 <input type="file"
-                       name="Attachments"
+                       name="Attachments[]"
                        id="fileInput"
                        multiple>
 
