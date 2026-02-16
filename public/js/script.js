@@ -1,24 +1,27 @@
 // ==========================================
-// TRUCK INSURANCE QUESTIONNAIRE (FULL FIXED)
+// TRUCK INSURANCE QUESTIONNAIRE
+// REFACTORED - SINGLE FILE VERSION
 // ==========================================
 
-let selectedFiles = [];
-const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25MB
 const GEOAPIFY_KEY = "7036f365f5d04562aea31633f8ffd7cc";
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Add Buttons
     document.getElementById("addDriverBtn")?.addEventListener("click", addDriver);
     document.getElementById("addTruckBtn")?.addEventListener("click", addTruck);
     document.getElementById("addTrailerBtn")?.addEventListener("click", addTrailer);
     document.getElementById("addCargoBtn")?.addEventListener("click", addCargo);
 
+    // Form Submit
     document.getElementById("mainForm")?.addEventListener("submit", validateForm);
 
+    // Initialize Features
     initializeCoverages();
-    initializeFileUpload();
     initializeAddressAutocomplete();
+    initializeFileUpload();
 
+    // Default Rows
     addDriver();
     addTruck();
     addTrailer();
@@ -95,76 +98,36 @@ function setupAutocomplete(inputId) {
 
 
 // ==========================================
-// FILE UPLOAD (FULL FIX)
+// SINGLE FILE UPLOAD
 // ==========================================
 
 function initializeFileUpload() {
 
-    const uploadArea = document.getElementById("uploadArea");
     const fileInput = document.getElementById("fileInput");
+    const fileNameDisplay = document.getElementById("fileName");
 
-    if (!uploadArea || !fileInput) return;
+    if (!fileInput) return;
 
-    fileInput.addEventListener("change", (e) => {
-        addFiles(e.target.files);
-        fileInput.value = "";
+    fileInput.addEventListener("change", () => {
+
+        const file = fileInput.files[0];
+
+        if (!file) {
+            fileNameDisplay.textContent = "";
+            return;
+        }
+
+        // 10MB safe limit
+        if (file.size > 10 * 1024 * 1024) {
+            alert("File must be under 10MB.");
+            fileInput.value = "";
+            fileNameDisplay.textContent = "";
+            return;
+        }
+
+        fileNameDisplay.textContent =
+            `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
     });
-
-    uploadArea.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        uploadArea.classList.add("dragover");
-    });
-
-    uploadArea.addEventListener("dragleave", () => {
-        uploadArea.classList.remove("dragover");
-    });
-
-    uploadArea.addEventListener("drop", (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove("dragover");
-        addFiles(e.dataTransfer.files);
-    });
-}
-
-function addFiles(files) {
-
-    const newFiles = Array.from(files);
-
-    const totalSize =
-        [...selectedFiles, ...newFiles]
-        .reduce((sum, file) => sum + file.size, 0);
-
-    if (totalSize > MAX_TOTAL_SIZE) {
-        alert("Total file size cannot exceed 25MB.");
-        return;
-    }
-
-    selectedFiles = [...selectedFiles, ...newFiles];
-    renderFileList();
-}
-
-function renderFileList() {
-
-    const fileList = document.getElementById("fileList");
-    fileList.innerHTML = "";
-
-    selectedFiles.forEach((file, index) => {
-
-        const div = document.createElement("div");
-        div.className = "file-item";
-
-        div.innerHTML = `
-            <span>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
-            <button type="button" onclick="removeFile(${index})">Remove</button>
-        `;
-
-        fileList.appendChild(div);
-    });
-}
-
-function removeFile(index) {
-    selectedFiles.splice(index, 1);
-    renderFileList();
 }
 
 
@@ -496,7 +459,7 @@ function toggleCoverage(radio, name) {
 
 
 // ==========================================
-// FORM VALIDATION + MULTI FILE SUBMIT FIX
+// FORM VALIDATION
 // ==========================================
 
 function validateForm(e) {
@@ -534,21 +497,6 @@ function validateForm(e) {
         alert("Cargo percentages must equal exactly 100%.");
         return false;
     }
-
-    const totalFileSize = selectedFiles
-        .reduce((sum, file) => sum + file.size, 0);
-
-    if (totalFileSize > MAX_TOTAL_SIZE) {
-        e.preventDefault();
-        alert("Total file size exceeds 25MB limit.");
-        return false;
-    }
-
-    // CRITICAL FIX: Rebuild real file input before submit
-    const fileInput = document.getElementById("fileInput");
-    const dataTransfer = new DataTransfer();
-    selectedFiles.forEach(file => dataTransfer.items.add(file));
-    fileInput.files = dataTransfer.files;
 
     return true;
 }

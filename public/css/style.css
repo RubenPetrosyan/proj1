@@ -6,7 +6,6 @@
 }
 
 html {
-    -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
 }
@@ -15,35 +14,44 @@ body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     background-color: #f4f6f9;
-    color: #333;
-    line-height: 1.4;
+    color: #1f2937;
+    line-height: 1.5;
 }
+
 
 /* =====================================
    CONTAINER
 ===================================== */
 .container {
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 24px;
 }
+
+h1 {
+    margin-bottom: 28px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
 
 /* =====================================
    SECTIONS
 ===================================== */
 .section {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .section h2 {
-    margin: 0 0 16px;
-    font-size: 18px;
-    color: #1e2a38;
+    margin: 0 0 18px;
+    font-size: 17px;
+    font-weight: 600;
 }
+
 
 /* =====================================
    SECTION HEADER
@@ -52,23 +60,25 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .inline-add-btn {
-    background: #28a745;
-    color: white;
+    background: #2563eb;
+    color: #fff;
     padding: 6px 14px;
     font-size: 13px;
-    border-radius: 6px;
+    border-radius: 8px;
+    cursor: pointer;
     transition: 0.2s ease;
 }
 
 .inline-add-btn:hover {
-    background: #218838;
+    background: #1e4ed8;
 }
+
 
 /* =====================================
    FORM ELEMENTS
@@ -78,85 +88,86 @@ label {
     flex-direction: column;
     font-size: 13px;
     font-weight: 500;
-    color: #444;
 }
 
 input,
 select {
-    margin-top: 5px;
+    margin-top: 6px;
     padding: 10px 12px;
-    border: 1px solid #d0d0d0;
-    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
     font-size: 14px;
     width: 100%;
     transition: 0.2s ease;
-    min-height: 42px; /* better tap target */
+    min-height: 42px;
 }
 
 input:focus,
 select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     outline: none;
 }
 
 input[type="radio"] {
-    accent-color: #007bff;
-    margin-right: 6px;
+    accent-color: #2563eb;
     min-height: auto;
 }
+
 
 /* =====================================
    INSURED ROW
 ===================================== */
 .insured-row {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     flex-wrap: wrap;
 }
 
 .insured-row label {
-    flex: 1 1 180px;
+    flex: 1 1 200px;
 }
 
 .short-field {
-    flex: 0 0 150px;
+    flex: 0 0 160px;
 }
 
+
 /* =====================================
-   ITEMS (Drivers/Trucks/etc)
+   DYNAMIC ITEMS (Drivers/Trucks/etc)
 ===================================== */
 .items-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
 }
 
 .row-item {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     align-items: flex-end;
-    background: #fafafa;
-    border: 1px solid #e5e5e5;
-    padding: 16px;
-    border-radius: 10px;
-    position: relative;
     flex-wrap: wrap;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 18px;
+    border-radius: 14px;
+    position: relative;
 }
 
 .row-item .remove-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 6px 10px;
+    top: 12px;
+    right: 12px;
+    background: #dc2626;
+    color: #fff;
     font-size: 12px;
-    background: #dc3545;
-    color: white;
-    border-radius: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .row-item .remove-btn:hover {
-    background: #c82333;
+    background: #b91c1c;
 }
 
 /* Width Helpers */
@@ -168,83 +179,55 @@ input[type="radio"] {
 
 .w-year      { flex: 0 0 90px; }
 .w-make      { flex: 1 1 150px; }
-.w-trucktype { flex: 0 0 140px; }
+.w-trucktype { flex: 0 0 150px; }
 .w-gvw       { flex: 0 0 120px; }
 .w-vin       { flex: 1 1 220px; }
 
+
 /* =====================================
-   CARGO
+   CARGO TOTAL
 ===================================== */
 .total-indicator {
-    font-weight: 700;
+    margin-top: 14px;
+    font-weight: 600;
     font-size: 15px;
     text-align: right;
-    margin-top: 12px;
 }
+
 
 /* =====================================
-   FILE UPLOAD
+   SINGLE FILE UPLOAD (COMPACT)
 ===================================== */
-.upload-area {
-    border: 2px dashed #007bff;
-    border-radius: 12px;
-    padding: 28px 20px;
-    text-align: center;
-    background: #f8fbff;
-    transition: 0.2s ease;
-}
-
-.upload-area.dragover {
-    background: #e9f3ff;
-    border-color: #0056b3;
-}
-
-.upload-area p {
-    margin: 6px 0;
-    font-size: 14px;
-}
-
-.max-size {
-    font-weight: 600;
-    color: #dc3545;
-}
-
-.upload-area input[type="file"] {
-    display: none;
-}
-
-.browse-btn {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 10px 20px;
-    background: #007bff;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.browse-btn:hover {
-    background: #0069d9;
-}
-
-.file-list {
-    margin-top: 16px;
-    text-align: left;
-    font-size: 14px;
-}
-
-.file-item {
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
+.compact-upload {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 10px;
-    flex-wrap: wrap;
 }
+
+.file-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.file-label input[type="file"] {
+    margin-top: 6px;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.file-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2563eb;
+}
+
+.upload-note {
+    font-size: 12px;
+    color: #6b7280;
+}
+
 
 /* =====================================
    COVERAGE GRID
@@ -252,14 +235,20 @@ input[type="radio"] {
 .coverage-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 20px;
 }
 
 .coverage-row {
-    border: 1px solid #e5e5e5;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
     padding: 16px;
-    border-radius: 10px;
-    background: #fafafa;
+    border-radius: 14px;
+}
+
+.coverage-row strong {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .coverage-options {
@@ -274,31 +263,34 @@ input[type="radio"] {
     gap: 10px;
 }
 
+
 /* =====================================
    BUTTONS
 ===================================== */
 button {
     border: none;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: 0.2s ease;
 }
 
 .submit-btn {
     width: 100%;
-    background: #007bff;
-    color: white;
+    background: #2563eb;
+    color: #fff;
     font-size: 16px;
+    font-weight: 600;
     padding: 14px;
     margin-top: 28px;
 }
 
 .submit-btn:hover {
-    background: #0069d9;
+    background: #1e4ed8;
 }
 
+
 /* =====================================
-   AUTOCOMPLETE
+   AUTOCOMPLETE DROPDOWN
 ===================================== */
 .suggestions-box {
     position: absolute;
@@ -306,30 +298,30 @@ button {
     left: 0;
     right: 0;
     background: #fff;
-    border: 1px solid #dcdcdc;
+    border: 1px solid #e5e7eb;
     border-top: none;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 12px 12px;
     max-height: 220px;
     overflow-y: auto;
     z-index: 1000;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 .suggestion-item {
     padding: 10px 14px;
-    font-size: 14px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .suggestion-item:hover {
-    background: #f1f5ff;
+    background: #f3f4f6;
 }
 
-/* =====================================
-   RESPONSIVE FIXES
-===================================== */
 
-@media (max-width: 1100px) {
+/* =====================================
+   RESPONSIVE
+===================================== */
+@media (max-width: 1024px) {
     .coverage-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -338,7 +330,7 @@ button {
 @media (max-width: 768px) {
 
     .container {
-        padding: 14px;
+        padding: 16px;
     }
 
     .insured-row {
@@ -352,13 +344,13 @@ button {
     .row-item {
         flex-direction: column;
         align-items: stretch;
-        padding: 18px 14px;
+        padding: 20px 16px;
     }
 
     .row-item .remove-btn {
         position: static;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 12px;
     }
 
     .w-type,
@@ -372,20 +364,6 @@ button {
     .w-gvw,
     .w-vin {
         flex: 1 1 100%;
-    }
-
-    .file-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .upload-area {
-        padding: 22px 16px;
-    }
-
-    .browse-btn {
-        width: 100%;
-        text-align: center;
     }
 
     .submit-btn {

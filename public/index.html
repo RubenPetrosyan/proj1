@@ -12,10 +12,6 @@
 
     <h1>Truck Insurance Questionnaire</h1>
 
-    <!-- IMPORTANT:
-         - action/method/enctype restored for proper FormSubmit handling
-         - file input name changed to Attachments[] (required for multiple files)
-    -->
     <form action="https://formsubmit.co/ae9cde1290fb998e04fe7ac5287e8765"
           method="POST"
           enctype="multipart/form-data"
@@ -35,6 +31,7 @@
             </label>
 
             <div class="insured-row">
+
                 <label>
                     Phone *
                     <input name="Phone" required>
@@ -66,8 +63,10 @@
                     ELD Provider
                     <input name="ELD Provider">
                 </label>
+
             </div>
         </div>
+
 
         <!-- ================= ADDRESSES ================= -->
         <div class="section">
@@ -78,7 +77,6 @@
                 <input type="text"
                        id="mailingAddress"
                        name="Mailing Address"
-                       placeholder="Start typing address..."
                        autocomplete="off"
                        required>
             </label>
@@ -88,11 +86,11 @@
                 <input type="text"
                        id="garagingAddress"
                        name="Garaging Address"
-                       placeholder="Start typing address..."
                        autocomplete="off"
                        required>
             </label>
         </div>
+
 
         <!-- ================= DRIVERS ================= -->
         <div class="section">
@@ -105,6 +103,7 @@
             <div id="drivers" class="items-container"></div>
         </div>
 
+
         <!-- ================= TRUCKS ================= -->
         <div class="section">
             <div class="section-header">
@@ -115,6 +114,7 @@
             </div>
             <div id="trucks" class="items-container"></div>
         </div>
+
 
         <!-- ================= TRAILERS ================= -->
         <div class="section">
@@ -127,6 +127,7 @@
             <div id="trailers" class="items-container"></div>
         </div>
 
+
         <!-- ================= CARGO ================= -->
         <div class="section">
             <div class="section-header">
@@ -135,47 +136,43 @@
                     + Add Commodity
                 </button>
             </div>
+
             <div id="cargo" class="items-container"></div>
             <p class="total-indicator" id="cargoTotal">Total: 0%</p>
         </div>
 
-        <!-- ================= FILE UPLOAD ================= -->
+
+        <!-- ================= SUPPORTING DOCUMENT ================= -->
         <div class="section">
-            <h2>Supporting Documents</h2>
+            <h2>Supporting Document (Optional)</h2>
 
-            <div class="upload-area" id="uploadArea">
+            <div class="compact-upload">
 
-                <p>
-                    Upload CDL copies, Loss Runs, IFTAs,
-                    or handwritten Truck/Trailer/Drivers list.
-                </p>
-
-                <p class="max-size">
-                    Maximum total file size: 25MB
-                </p>
-
-                <!-- IMPORTANT FIX:
-                     - name changed to Attachments[]
-                     - removed onclick duplication triggers
-                -->
-                <input type="file"
-       name="attachment"
-       id="fileInput"
-       multiple>
-
-                <label for="fileInput" class="browse-btn">
-                    Browse Files
+                <label class="file-label">
+                    Attach File (Max 10MB)
+                    <input type="file"
+                           name="attachment"
+                           id="fileInput"
+                           accept=".pdf,.jpg,.jpeg,.png,.zip">
                 </label>
 
-                <div id="fileList" class="file-list"></div>
+                <div id="fileName" class="file-name"></div>
+
+                <p class="upload-note">
+                    If you have multiple documents, please combine them
+                    into a single PDF or ZIP file before uploading.
+                </p>
+
             </div>
         </div>
+
 
         <!-- ================= COVERAGE ================= -->
         <div class="section">
             <h2>Coverage & Limits Requested</h2>
             <div id="coverages" class="coverage-grid"></div>
         </div>
+
 
         <button type="submit" class="submit-btn">
             Submit Application
