@@ -268,10 +268,10 @@ function addTruck() {
             <select name="Truck Type">
                 <option value="">Type</option>
                 <option>Tractor</option>
-                <option>Box</option>
-                <option>Flatbed</option>
-                <option>Reefer</option>
-                <option>Tanker</option>
+                <option>Box Truck</option>
+                <option>Dump Truck</option>
+                <option>Tank Truck</option>
+                <option>Tow Truck</option>
                 <option>Other</option>
             </select>
         </label>
