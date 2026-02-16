@@ -19,25 +19,12 @@ body {
 
 
 /* =====================================
-   PAGE LAYOUT WITH LOGO
+   PAGE WRAPPER
 ===================================== */
 .page-wrapper {
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    gap: 80px;
     padding: 40px 20px;
-}
-
-.logo-area {
-    width: 240px;
-    flex-shrink: 0;
-}
-
-.logo-area img {
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 
@@ -49,8 +36,24 @@ body {
     width: 100%;
 }
 
-h1 {
+
+/* =====================================
+   HEADER WITH LOGO
+===================================== */
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
     margin-bottom: 26px;
+}
+
+.header-logo {
+    width: 60px;
+    height: auto;
+}
+
+h1 {
+    margin: 0;
     font-size: 24px;
     font-weight: 600;
 }
@@ -125,7 +128,7 @@ input[type="radio"] {
 
 
 /* =====================================
-   SECTION HEADER
+   SECTION HEADER (ADD BUTTONS)
 ===================================== */
 .section-header {
     display: flex;
@@ -302,6 +305,7 @@ input[type="radio"] {
     border-radius: 8px;
     margin-top: 20px;
     border: none;
+    cursor: pointer;
 }
 
 .submit-btn:hover {
@@ -341,16 +345,6 @@ input[type="radio"] {
    RESPONSIVE
 ===================================== */
 @media (max-width: 1024px) {
-
-    .page-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .logo-area {
-        display: none;
-    }
-
     .coverage-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -388,5 +382,16 @@ input[type="radio"] {
 
     .submit-btn {
         padding: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .title-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-logo {
+        width: 50px;
     }
 }
