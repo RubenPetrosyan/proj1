@@ -1,27 +1,27 @@
 // ==========================================
 // TRUCK INSURANCE QUESTIONNAIRE
-// UPDATED VERSION
+// OPTIMIZED VERSION
 // ==========================================
 
 const GEOAPIFY_KEY = "7036f365f5d04562aea31633f8ffd7cc";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Add Buttons
+    // Buttons
     document.getElementById("addDriverBtn")?.addEventListener("click", addDriver);
     document.getElementById("addTruckBtn")?.addEventListener("click", addTruck);
     document.getElementById("addTrailerBtn")?.addEventListener("click", addTrailer);
     document.getElementById("addCargoBtn")?.addEventListener("click", addCargo);
 
-    // Form Submit
+    // Submit
     document.getElementById("mainForm")?.addEventListener("submit", validateForm);
 
-    // Initialize Features
+    // Initialize
     initializeCoverages();
     initializeAddressAutocomplete();
     initializeFileUpload();
 
-    // Default Rows
+    // Default rows
     addDriver();
     addTruck();
     addTrailer();
@@ -70,7 +70,7 @@ function setupAutocomplete(inputId) {
 
                     suggestionBox.innerHTML = "";
 
-                    data.features.forEach(feature => {
+                    data.features?.forEach(feature => {
 
                         const div = document.createElement("div");
                         div.className = "suggestion-item";
@@ -99,7 +99,7 @@ function setupAutocomplete(inputId) {
 
 
 // ==========================================
-// FILE UPLOAD (WITH REMOVE BUTTON)
+// FILE UPLOAD
 // ==========================================
 
 function initializeFileUpload() {
@@ -115,17 +115,14 @@ function initializeFileUpload() {
         const file = fileInput.files[0];
 
         if (!file) {
-            fileNameDisplay.textContent = "";
-            removeBtn.style.display = "none";
+            resetFile();
             return;
         }
 
-        // 10MB limit
-        if (file.size > 10 * 1024 * 1024) {
-            alert("File must be under 10MB.");
-            fileInput.value = "";
-            fileNameDisplay.textContent = "";
-            removeBtn.style.display = "none";
+        // 25MB limit
+        if (file.size > 25 * 1024 * 1024) {
+            alert("File must be under 25MB.");
+            resetFile();
             return;
         }
 
@@ -135,11 +132,13 @@ function initializeFileUpload() {
         removeBtn.style.display = "inline-block";
     });
 
-    removeBtn.addEventListener("click", () => {
+    removeBtn.addEventListener("click", resetFile);
+
+    function resetFile() {
         fileInput.value = "";
         fileNameDisplay.textContent = "";
         removeBtn.style.display = "none";
-    });
+    }
 }
 
 
@@ -148,7 +147,7 @@ function initializeFileUpload() {
 // ==========================================
 
 function removeItem(button) {
-    button.closest(".row-item").remove();
+    button.closest(".row-item")?.remove();
 }
 
 
@@ -161,13 +160,14 @@ let ownerSelected = false;
 function addDriver() {
 
     const container = document.getElementById("drivers");
+    if (!container) return;
 
     const row = document.createElement("div");
     row.className = "row-item";
 
     row.innerHTML = `
         <label class="w-type">Type
-            <select name="Driver Type" onchange="handleOwnerSelection(this)">
+            <select name="Driver Type">
                 <option value="Driver" selected>Driver</option>
                 <option value="Owner">Owner</option>
             </select>
@@ -194,12 +194,18 @@ function addDriver() {
             <input type="date" name="Date Hired">
         </label>
 
-        <button type="button" class="remove-btn" onclick="removeDriver(this)">
+        <button type="button" class="remove-btn">
             Remove
         </button>
     `;
 
     container.appendChild(row);
+
+    const select = row.querySelector("select");
+    const removeBtn = row.querySelector(".remove-btn");
+
+    select.addEventListener("change", () => handleOwnerSelection(select));
+    removeBtn.addEventListener("click", () => removeDriver(row));
 }
 
 function handleOwnerSelection(select) {
@@ -229,9 +235,8 @@ function handleOwnerSelection(select) {
     }
 }
 
-function removeDriver(button) {
+function removeDriver(row) {
 
-    const row = button.closest(".row-item");
     const select = row.querySelector("select");
 
     if (select.value === "Owner") {
@@ -251,6 +256,7 @@ function removeDriver(button) {
 function addTruck() {
 
     const container = document.getElementById("trucks");
+    if (!container) return;
 
     const row = document.createElement("div");
     row.className = "row-item";
@@ -284,12 +290,15 @@ function addTruck() {
             <input name="Truck VIN">
         </label>
 
-        <button type="button" class="remove-btn" onclick="removeItem(this)">
+        <button type="button" class="remove-btn">
             Remove
         </button>
     `;
 
     container.appendChild(row);
+
+    row.querySelector(".remove-btn")
+        .addEventListener("click", () => removeItem(row));
 }
 
 
@@ -300,6 +309,7 @@ function addTruck() {
 function addTrailer() {
 
     const container = document.getElementById("trailers");
+    if (!container) return;
 
     const row = document.createElement("div");
     row.className = "row-item";
@@ -313,27 +323,30 @@ function addTrailer() {
             <input name="Trailer Make">
         </label>
 
-<label class="w-trucktype">Power Unit Type
-    <select name="Truck Type">
-        <option value="">Select Type</option>
-        <option>Dry Van</option>
-        <option>Reefer</option>
-        <option>Flatbed</option>
-        <option>Tanker</option>
-        <option>Other</option>
-    </select>
-</label>
+        <label class="w-trucktype">Type
+            <select name="Trailer Type">
+                <option value="">Select Type</option>
+                <option>Dry Van</option>
+                <option>Reefer</option>
+                <option>Flatbed</option>
+                <option>Tanker</option>
+                <option>Other</option>
+            </select>
+        </label>
 
         <label class="w-vin">VIN
             <input name="Trailer VIN">
         </label>
 
-        <button type="button" class="remove-btn" onclick="removeItem(this)">
+        <button type="button" class="remove-btn">
             Remove
         </button>
     `;
 
     container.appendChild(row);
+
+    row.querySelector(".remove-btn")
+        .addEventListener("click", () => removeItem(row));
 }
 
 
@@ -344,6 +357,7 @@ function addTrailer() {
 function addCargo() {
 
     const container = document.getElementById("cargo");
+    if (!container) return;
 
     const row = document.createElement("div");
     row.className = "row-item";
@@ -355,22 +369,25 @@ function addCargo() {
 
         <label class="w-year">% 
             <input type="number" name="Commodity Percentage"
-                min="0" max="100"
-                oninput="updateCargoTotal()">
+                min="0" max="100">
         </label>
 
-        <button type="button" class="remove-btn" onclick="removeCargo(this)">
+        <button type="button" class="remove-btn">
             Remove
         </button>
     `;
 
     container.appendChild(row);
 
-    updateCargoTotal();
-}
+    row.querySelector(".remove-btn")
+        .addEventListener("click", () => {
+            row.remove();
+            updateCargoTotal();
+        });
 
-function removeCargo(button) {
-    button.closest(".row-item").remove();
+    row.querySelector("input[name='Commodity Percentage']")
+        .addEventListener("input", updateCargoTotal);
+
     updateCargoTotal();
 }
 
@@ -382,13 +399,14 @@ function updateCargoTotal() {
         .forEach(input => total += Number(input.value) || 0);
 
     const indicator = document.getElementById("cargoTotal");
+    if (!indicator) return;
 
     indicator.textContent = `Total: ${total}%`;
 
     indicator.style.color =
-        total === 100 ? "#28a745" :
-        total > 100 ? "#dc3545" :
-        "#fd7e14";
+        total === 100 ? "#16a34a" :
+        total > 100 ? "#dc2626" :
+        "#f59e0b";
 }
 
 
@@ -411,6 +429,7 @@ const coverageList = [
 function initializeCoverages() {
 
     const container = document.getElementById("coverages");
+    if (!container) return;
 
     coverageList.forEach(name => {
 
@@ -424,14 +443,11 @@ function initializeCoverages() {
 
             <div class="coverage-options">
                 <label>
-                    <input type="radio" name="${name}" value="Yes"
-                        onchange="toggleCoverage(this, '${name}')">
+                    <input type="radio" name="${name}" value="Yes">
                     Yes
                 </label>
-
                 <label>
-                    <input type="radio" name="${name}" value="No" checked
-                        onchange="toggleCoverage(this, '${name}')">
+                    <input type="radio" name="${name}" value="No" checked>
                     No
                 </label>
             </div>
@@ -443,7 +459,6 @@ function initializeCoverages() {
                         <input type="number" name="${name} Limit" min="0">
                     </label>
                 ` : ""}
-
                 <label>
                     Deductible ($)
                     <input type="number" name="${name} Deductible" min="0">
@@ -452,24 +467,26 @@ function initializeCoverages() {
         `;
 
         container.appendChild(row);
+
+        const radios = row.querySelectorAll("input[type='radio']");
+        const fields = row.querySelector(".coverage-fields");
+
+        radios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                if (radio.value === "Yes" && radio.checked) {
+                    fields.style.display = "flex";
+                } else if (radio.value === "No" && radio.checked) {
+                    fields.style.display = "none";
+                    fields.querySelectorAll("input").forEach(i => i.value = "");
+                }
+            });
+        });
     });
-}
-
-function toggleCoverage(radio, name) {
-
-    const fields = document.getElementById(`${name}-fields`);
-
-    if (radio.value === "Yes") {
-        fields.style.display = "flex";
-    } else {
-        fields.style.display = "none";
-        fields.querySelectorAll("input").forEach(i => i.value = "");
-    }
 }
 
 
 // ==========================================
-// FORM VALIDATION
+// VALIDATION
 // ==========================================
 
 function validateForm(e) {

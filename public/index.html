@@ -10,10 +10,9 @@
 
 <div class="page-wrapper">
 
-    <!-- ================= MAIN FORM CONTAINER ================= -->
     <div class="container">
 
-        <!-- ===== HEADER WITH LOGO + TITLE ===== -->
+        <!-- HEADER -->
         <div class="title-row">
             <img src="images/logo.png" alt="Company Logo" class="header-logo">
             <h1>Truck Insurance Quote | Fifty Bridges Insurance Services, Inc</h1>
@@ -28,78 +27,82 @@
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_subject" value="New Truck Insurance Submission">
 
-            <!-- ================= GENERAL INFORMATION ================= -->
-            <div class="section">
 
-                <h2>General Information</h2>
+            <!-- ================= TOP GRID ================= -->
+            <div class="top-grid">
 
-                <div class="form-row">
-                    <label class="w-60">
-                        Company Name | DBA *
-                        <input name="Company Name | DBA" required>
-                    </label>
+                <!-- GENERAL INFO -->
+                <div class="section">
+                    <h2>General Information</h2>
 
-                    <label class="w-40">
-                        ELD Provider
-                        <input name="ELD Provider">
-                    </label>
+                    <div class="form-grid-2">
+
+                        <label>
+                            Company Name | DBA *
+                            <input name="Company Name | DBA" required>
+                        </label>
+
+                        <label>
+                            ELD Provider
+                            <input name="ELD Provider">
+                        </label>
+
+                        <label>
+                            Phone *
+                            <input name="Phone" required>
+                        </label>
+
+                        <label>
+                            Email *
+                            <input type="email" name="Email" required>
+                        </label>
+
+                        <label>
+                            DOT# *
+                            <input name="DOT#" required>
+                        </label>
+
+                        <label>
+                            Legal Status
+                            <select name="Legal Status">
+                                <option value="">Select</option>
+                                <option>Corporation</option>
+                                <option>LLC</option>
+                                <option>Sole Proprietor</option>
+                                <option>Partnership</option>
+                                <option>Individual</option>
+                            </select>
+                        </label>
+
+                    </div>
                 </div>
 
-                <div class="form-row">
-                    <label>
-                        Phone *
-                        <input name="Phone" required>
-                    </label>
 
-                    <label>
-                        Email *
-                        <input type="email" name="Email" required>
-                    </label>
+                <!-- ADDRESSES -->
+                <div class="section">
+                    <h2>Addresses</h2>
 
-                    <label>
-                        DOT# *
-                        <input name="DOT#" required>
-                    </label>
+                    <div class="form-grid-1">
 
-                    <label>
-                        Legal Status
-                        <select name="Legal Status">
-                            <option value="">Select</option>
-                            <option>Corporation</option>
-                            <option>LLC</option>
-                            <option>Sole Proprietor</option>
-                            <option>Partnership</option>
-                            <option>Individual</option>
-                        </select>
-                    </label>
-                </div>
+                        <label>
+                            Mailing Address *
+                            <input type="text"
+                                   id="mailingAddress"
+                                   name="Mailing Address"
+                                   autocomplete="off"
+                                   required>
+                        </label>
 
-            </div>
+                        <label>
+                            Garaging Address *
+                            <input type="text"
+                                   id="garagingAddress"
+                                   name="Garaging Address"
+                                   autocomplete="off"
+                                   required>
+                        </label>
 
-
-            <!-- ================= ADDRESSES ================= -->
-            <div class="section">
-
-                <h2>Addresses</h2>
-
-                <div class="form-row">
-                    <label>
-                        Mailing Address *
-                        <input type="text"
-                               id="mailingAddress"
-                               name="Mailing Address"
-                               autocomplete="off"
-                               required>
-                    </label>
-
-                    <label>
-                        Garaging Address *
-                        <input type="text"
-                               id="garagingAddress"
-                               name="Garaging Address"
-                               autocomplete="off"
-                               required>
-                    </label>
+                    </div>
                 </div>
 
             </div>
@@ -117,27 +120,31 @@
             </div>
 
 
-            <!-- ================= TRUCKS ================= -->
-            <div class="section">
-                <div class="section-header">
-                    <h2>Trucks</h2>
-                    <button type="button" id="addTruckBtn" class="inline-add-btn">
-                        + Add Truck
-                    </button>
-                </div>
-                <div id="trucks" class="items-container"></div>
-            </div>
+            <!-- ================= VEHICLES GRID ================= -->
+            <div class="vehicle-grid">
 
-
-            <!-- ================= TRAILERS ================= -->
-            <div class="section">
-                <div class="section-header">
-                    <h2>Trailers</h2>
-                    <button type="button" id="addTrailerBtn" class="inline-add-btn">
-                        + Add Trailer
-                    </button>
+                <!-- TRUCKS -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Trucks</h2>
+                        <button type="button" id="addTruckBtn" class="inline-add-btn">
+                            + Add Truck
+                        </button>
+                    </div>
+                    <div id="trucks" class="items-container"></div>
                 </div>
-                <div id="trailers" class="items-container"></div>
+
+                <!-- TRAILERS -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Trailers</h2>
+                        <button type="button" id="addTrailerBtn" class="inline-add-btn">
+                            + Add Trailer
+                        </button>
+                    </div>
+                    <div id="trailers" class="items-container"></div>
+                </div>
+
             </div>
 
 
@@ -188,7 +195,7 @@
             </div>
 
 
-            <!-- ================= COVERAGE ================= -->
+            <!-- ================= COVERAGES ================= -->
             <div class="section">
                 <h2>Coverage & Limits Requested</h2>
                 <div id="coverages" class="coverage-grid"></div>
@@ -200,8 +207,8 @@
             </button>
 
         </form>
-    </div>
 
+    </div>
 </div>
 
 <script src="js/script.js"></script>
