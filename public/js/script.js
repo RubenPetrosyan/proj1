@@ -316,12 +316,10 @@ function addTrailer() {
 <label class="w-trucktype">Power Unit Type
     <select name="Truck Type">
         <option value="">Select Type</option>
-        <option>Tractor</option>
-        <option>Tractor</option>
-        <option>Box Truck</option>
-        <option>Dump Truck</option>
-        <option>Tank Truck</option>
-        <option>Tow Truck</option>
+        <option>Dry Van</option>
+        <option>Reefer</option>
+        <option>Flatbed</option>
+        <option>Tanker</option>
         <option>Other</option>
     </select>
 </label>
