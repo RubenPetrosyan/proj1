@@ -1,27 +1,23 @@
 // ==========================================
 // TRUCK INSURANCE QUESTIONNAIRE
-// OPTIMIZED VERSION
+// FINAL REVISED VERSION (ARRAY SAFE)
 // ==========================================
 
 const GEOAPIFY_KEY = "7036f365f5d04562aea31633f8ffd7cc";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Buttons
     document.getElementById("addDriverBtn")?.addEventListener("click", addDriver);
     document.getElementById("addTruckBtn")?.addEventListener("click", addTruck);
     document.getElementById("addTrailerBtn")?.addEventListener("click", addTrailer);
     document.getElementById("addCargoBtn")?.addEventListener("click", addCargo);
 
-    // Submit
     document.getElementById("mainForm")?.addEventListener("submit", validateForm);
 
-    // Initialize
     initializeCoverages();
     initializeAddressAutocomplete();
     initializeFileUpload();
 
-    // Default rows
     addDriver();
     addTruck();
     addTrailer();
@@ -119,7 +115,6 @@ function initializeFileUpload() {
             return;
         }
 
-        // 25MB limit
         if (file.size > 25 * 1024 * 1024) {
             alert("File must be under 25MB.");
             resetFile();
@@ -146,8 +141,8 @@ function initializeFileUpload() {
 // SHARED REMOVE
 // ==========================================
 
-function removeItem(button) {
-    button.closest(".row-item")?.remove();
+function removeItem(row) {
+    row.remove();
 }
 
 
@@ -167,36 +162,34 @@ function addDriver() {
 
     row.innerHTML = `
         <label class="w-type">Type
-            <select name="Driver Type">
+            <select name="Driver Type[]">
                 <option value="Driver" selected>Driver</option>
                 <option value="Owner">Owner</option>
             </select>
         </label>
 
         <label class="w-name">Name
-            <input name="Driver Full Name">
+            <input name="Driver Full Name[]">
         </label>
 
         <label class="w-date">DOB
-            <input type="date" name="Driver DOB">
+            <input type="date" name="Driver DOB[]">
         </label>
 
         <label class="w-license">License #
-            <input name="License Number">
+            <input name="License Number[]">
         </label>
 
         <label class="w-state">State
-            <input name="License State" maxlength="2"
+            <input name="License State[]" maxlength="2"
                 oninput="this.value = this.value.toUpperCase()">
         </label>
 
         <label class="w-date">Hired
-            <input type="date" name="Date Hired">
+            <input type="date" name="Date Hired[]">
         </label>
 
-        <button type="button" class="remove-btn">
-            Remove
-        </button>
+        <button type="button" class="remove-btn">Remove</button>
     `;
 
     container.appendChild(row);
@@ -263,15 +256,15 @@ function addTruck() {
 
     row.innerHTML = `
         <label class="w-year">Year
-            <input type="number" name="Truck Year">
+            <input type="number" name="Truck Year[]">
         </label>
 
         <label class="w-make">Make
-            <input name="Truck Make">
+            <input name="Truck Make[]">
         </label>
 
         <label class="w-trucktype">Type
-            <select name="Truck Type">
+            <select name="Truck Type[]">
                 <option value="">Type</option>
                 <option>Tractor</option>
                 <option>Box Truck</option>
@@ -283,16 +276,14 @@ function addTruck() {
         </label>
 
         <label class="w-gvw">GVW
-            <input type="number" name="GVW">
+            <input type="number" name="GVW[]">
         </label>
 
         <label class="w-vin">VIN
-            <input name="Truck VIN">
+            <input name="Truck VIN[]">
         </label>
 
-        <button type="button" class="remove-btn">
-            Remove
-        </button>
+        <button type="button" class="remove-btn">Remove</button>
     `;
 
     container.appendChild(row);
@@ -316,15 +307,15 @@ function addTrailer() {
 
     row.innerHTML = `
         <label class="w-year">Year
-            <input type="number" name="Trailer Year">
+            <input type="number" name="Trailer Year[]">
         </label>
 
         <label class="w-make">Make
-            <input name="Trailer Make">
+            <input name="Trailer Make[]">
         </label>
 
         <label class="w-trucktype">Type
-            <select name="Trailer Type">
+            <select name="Trailer Type[]">
                 <option value="">Select Type</option>
                 <option>Dry Van</option>
                 <option>Reefer</option>
@@ -335,12 +326,10 @@ function addTrailer() {
         </label>
 
         <label class="w-vin">VIN
-            <input name="Trailer VIN">
+            <input name="Trailer VIN[]">
         </label>
 
-        <button type="button" class="remove-btn">
-            Remove
-        </button>
+        <button type="button" class="remove-btn">Remove</button>
     `;
 
     container.appendChild(row);
@@ -364,17 +353,15 @@ function addCargo() {
 
     row.innerHTML = `
         <label class="w-name">Commodity
-            <input name="Commodity">
+            <input name="Commodity[]">
         </label>
 
         <label class="w-year">% 
-            <input type="number" name="Commodity Percentage"
+            <input type="number" name="Commodity Percentage[]"
                 min="0" max="100">
         </label>
 
-        <button type="button" class="remove-btn">
-            Remove
-        </button>
+        <button type="button" class="remove-btn">Remove</button>
     `;
 
     container.appendChild(row);
@@ -385,17 +372,22 @@ function addCargo() {
             updateCargoTotal();
         });
 
-    row.querySelector("input[name='Commodity Percentage']")
+    row.querySelector("input[name='Commodity Percentage[]']")
         .addEventListener("input", updateCargoTotal);
 
     updateCargoTotal();
 }
 
+
+// ==========================================
+// CARGO TOTAL
+// ==========================================
+
 function updateCargoTotal() {
 
     let total = 0;
 
-    document.querySelectorAll("input[name='Commodity Percentage']")
+    document.querySelectorAll("input[name='Commodity Percentage[]']")
         .forEach(input => total += Number(input.value) || 0);
 
     const indicator = document.getElementById("cargoTotal");
@@ -411,7 +403,7 @@ function updateCargoTotal() {
 
 
 // ==========================================
-// COVERAGES
+// COVERAGES (UNCHANGED)
 // ==========================================
 
 const coverageList = [
@@ -516,7 +508,7 @@ function validateForm(e) {
     }
 
     let total = 0;
-    document.querySelectorAll("input[name='Commodity Percentage']")
+    document.querySelectorAll("input[name='Commodity Percentage[]']")
         .forEach(i => total += Number(i.value) || 0);
 
     if (total !== 100) {

@@ -29,10 +29,10 @@ body {
 
 
 /* =====================================
-   CONTAINER (WIDER DESKTOP)
+   CONTAINER (FULL DESKTOP WIDTH)
 ===================================== */
 .container {
-    max-width: 1450px;   /* increased from 1050 */
+    max-width: 1500px;
     width: 100%;
 }
 
@@ -60,7 +60,7 @@ h1 {
 
 
 /* =====================================
-   SECTION STYLING
+   SECTION STYLE
 ===================================== */
 .section {
     background: #ffffff;
@@ -82,7 +82,7 @@ h1 {
 ===================================== */
 .top-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
     gap: 18px;
 }
 
@@ -98,7 +98,7 @@ h1 {
 
 
 /* =====================================
-   FORM GRID LAYOUTS
+   FORM GRID
 ===================================== */
 .form-grid-2 {
     display: grid;
@@ -149,7 +149,7 @@ input[type="radio"] {
 
 
 /* =====================================
-   SECTION HEADER BUTTON
+   SECTION HEADER BUTTONS
 ===================================== */
 .section-header {
     display: flex;
@@ -280,7 +280,7 @@ input[type="radio"] {
 
 
 /* =====================================
-   COVERAGE GRID (WIDER DESKTOP)
+   COVERAGE GRID
 ===================================== */
 .coverage-grid {
     display: grid;
@@ -363,7 +363,7 @@ input[type="radio"] {
 
 
 /* =====================================
-   RESPONSIVE (MOBILE SAFE)
+   RESPONSIVE
 ===================================== */
 @media (max-width: 1200px) {
     .coverage-grid {
