@@ -1,5 +1,5 @@
 /* =====================================
-   RESET / BASE
+   RESET
 ===================================== */
 * {
     box-sizing: border-box;
@@ -15,7 +15,6 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     background-color: #f4f6f9;
     color: #1f2937;
-    line-height: 1.5;
 }
 
 
@@ -25,11 +24,11 @@ body {
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 24px;
+    padding: 20px;
 }
 
 h1 {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     font-size: 24px;
     font-weight: 600;
 }
@@ -40,16 +39,65 @@ h1 {
 ===================================== */
 .section {
     background: #ffffff;
-    padding: 22px;
-    border-radius: 14px;
-    margin-bottom: 22px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
 .section h2 {
-    margin: 0 0 18px;
-    font-size: 17px;
+    margin: 0 0 16px;
+    font-size: 16px;
     font-weight: 600;
+}
+
+
+/* =====================================
+   FORM ROW SYSTEM
+===================================== */
+.form-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.form-row label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.w-60 { flex: 0 0 60%; }
+.w-40 { flex: 0 0 40%; }
+
+
+/* =====================================
+   INPUTS
+===================================== */
+input,
+select {
+    margin-top: 6px;
+    padding: 9px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    min-height: 40px;
+    transition: 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    outline: none;
+}
+
+input[type="radio"] {
+    accent-color: #2563eb;
 }
 
 
@@ -60,19 +108,16 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .inline-add-btn {
     background: #2563eb;
     color: #fff;
-    padding: 6px 14px;
+    padding: 6px 12px;
     font-size: 13px;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.2s ease;
 }
 
 .inline-add-btn:hover {
@@ -81,146 +126,103 @@ h1 {
 
 
 /* =====================================
-   FORM ELEMENTS
-===================================== */
-label {
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-input,
-select {
-    margin-top: 6px;
-    padding: 10px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    font-size: 14px;
-    width: 100%;
-    transition: 0.2s ease;
-    min-height: 42px;
-}
-
-input:focus,
-select:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    outline: none;
-}
-
-input[type="radio"] {
-    accent-color: #2563eb;
-    min-height: auto;
-}
-
-
-/* =====================================
-   INSURED ROW
-===================================== */
-.insured-row {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.insured-row label {
-    flex: 1 1 200px;
-}
-
-.short-field {
-    flex: 0 0 160px;
-}
-
-
-/* =====================================
-   DYNAMIC ITEMS (Drivers/Trucks/etc)
+   DYNAMIC ROW ITEMS
 ===================================== */
 .items-container {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 12px;
 }
 
 .row-item {
     display: flex;
-    gap: 14px;
+    gap: 12px;
     align-items: flex-end;
     flex-wrap: wrap;
     background: #f9fafb;
     border: 1px solid #e5e7eb;
-    padding: 18px;
-    border-radius: 14px;
-    position: relative;
+    padding: 14px;
+    border-radius: 10px;
 }
 
+.row-item label {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Remove button inline */
 .row-item .remove-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
     background: #dc2626;
     color: #fff;
     font-size: 12px;
     padding: 6px 10px;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
+    align-self: center;
 }
 
 .row-item .remove-btn:hover {
     background: #b91c1c;
 }
 
+
 /* Width Helpers */
-.w-type      { flex: 0 0 120px; }
-.w-name      { flex: 1 1 200px; }
-.w-date      { flex: 0 0 140px; }
-.w-license   { flex: 0 0 160px; }
+.w-type      { flex: 0 0 110px; }
+.w-name      { flex: 1 1 160px; }
+.w-date      { flex: 0 0 130px; }
+.w-license   { flex: 0 0 140px; }
 .w-state     { flex: 0 0 70px; }
 
 .w-year      { flex: 0 0 90px; }
-.w-make      { flex: 1 1 150px; }
-.w-trucktype { flex: 0 0 150px; }
-.w-gvw       { flex: 0 0 120px; }
-.w-vin       { flex: 1 1 220px; }
+.w-make      { flex: 1 1 140px; }
+.w-trucktype { flex: 0 0 140px; }
+.w-gvw       { flex: 0 0 110px; }
+.w-vin       { flex: 1 1 180px; }
 
 
 /* =====================================
    CARGO TOTAL
 ===================================== */
 .total-indicator {
-    margin-top: 14px;
+    margin-top: 10px;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     text-align: right;
 }
 
 
 /* =====================================
-   SINGLE FILE UPLOAD (COMPACT)
+   FILE UPLOAD
 ===================================== */
 .compact-upload {
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+.file-preview {
+    display: flex;
+    align-items: center;
     gap: 10px;
-}
-
-.file-label {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.file-label input[type="file"] {
-    margin-top: 6px;
-    padding: 8px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    background: #fff;
 }
 
 .file-name {
     font-size: 14px;
-    font-weight: 500;
     color: #2563eb;
+}
+
+.remove-file-btn {
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.remove-file-btn:hover {
+    background: #b91c1c;
 }
 
 .upload-note {
@@ -235,45 +237,37 @@ input[type="radio"] {
 .coverage-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 16px;
 }
 
 .coverage-row {
     background: #f9fafb;
     border: 1px solid #e5e7eb;
-    padding: 16px;
-    border-radius: 14px;
+    padding: 14px;
+    border-radius: 10px;
 }
 
 .coverage-row strong {
     display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 .coverage-options {
     display: flex;
-    gap: 16px;
-    margin-bottom: 10px;
+    gap: 14px;
+    margin-bottom: 8px;
 }
 
 .coverage-fields {
     display: none;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 
 /* =====================================
-   BUTTONS
+   SUBMIT BUTTON
 ===================================== */
-button {
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 0.2s ease;
-}
-
 .submit-btn {
     width: 100%;
     background: #2563eb;
@@ -281,7 +275,8 @@ button {
     font-size: 16px;
     font-weight: 600;
     padding: 14px;
-    margin-top: 28px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
 .submit-btn:hover {
@@ -290,7 +285,7 @@ button {
 
 
 /* =====================================
-   AUTOCOMPLETE DROPDOWN
+   AUTOCOMPLETE
 ===================================== */
 .suggestions-box {
     position: absolute;
@@ -300,15 +295,14 @@ button {
     background: #fff;
     border: 1px solid #e5e7eb;
     border-top: none;
-    border-radius: 0 0 12px 12px;
-    max-height: 220px;
+    border-radius: 0 0 8px 8px;
+    max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 .suggestion-item {
-    padding: 10px 14px;
+    padding: 8px 12px;
     cursor: pointer;
     font-size: 14px;
 }
@@ -330,44 +324,34 @@ button {
 @media (max-width: 768px) {
 
     .container {
-        padding: 16px;
+        padding: 14px;
     }
 
-    .insured-row {
+    .form-row {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .row-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .row-item .remove-btn {
+        width: 100%;
     }
 
     .coverage-grid {
         grid-template-columns: 1fr;
     }
 
-    .row-item {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 20px 16px;
-    }
-
-    .row-item .remove-btn {
-        position: static;
-        width: 100%;
-        margin-top: 12px;
-    }
-
-    .w-type,
-    .w-name,
-    .w-date,
-    .w-license,
-    .w-state,
-    .w-year,
-    .w-make,
-    .w-trucktype,
-    .w-gvw,
-    .w-vin {
-        flex: 1 1 100%;
+    input,
+    select {
+        min-height: 44px;
     }
 
     .submit-btn {
-        font-size: 17px;
         padding: 16px;
     }
 }

@@ -1,6 +1,6 @@
 // ==========================================
 // TRUCK INSURANCE QUESTIONNAIRE
-// REFACTORED - SINGLE FILE VERSION
+// UPDATED VERSION
 // ==========================================
 
 const GEOAPIFY_KEY = "7036f365f5d04562aea31633f8ffd7cc";
@@ -55,8 +55,8 @@ function setupAutocomplete(inputId) {
     input.addEventListener("input", function () {
 
         clearTimeout(debounceTimer);
-
         const value = input.value.trim();
+
         if (value.length < 3) {
             suggestionBox.innerHTML = "";
             return;
@@ -83,6 +83,7 @@ function setupAutocomplete(inputId) {
 
                         suggestionBox.appendChild(div);
                     });
+
                 })
                 .catch(() => suggestionBox.innerHTML = "");
 
@@ -98,13 +99,14 @@ function setupAutocomplete(inputId) {
 
 
 // ==========================================
-// SINGLE FILE UPLOAD
+// FILE UPLOAD (WITH REMOVE BUTTON)
 // ==========================================
 
 function initializeFileUpload() {
 
     const fileInput = document.getElementById("fileInput");
     const fileNameDisplay = document.getElementById("fileName");
+    const removeBtn = document.getElementById("removeFileBtn");
 
     if (!fileInput) return;
 
@@ -114,19 +116,29 @@ function initializeFileUpload() {
 
         if (!file) {
             fileNameDisplay.textContent = "";
+            removeBtn.style.display = "none";
             return;
         }
 
-        // 10MB safe limit
+        // 10MB limit
         if (file.size > 10 * 1024 * 1024) {
             alert("File must be under 10MB.");
             fileInput.value = "";
             fileNameDisplay.textContent = "";
+            removeBtn.style.display = "none";
             return;
         }
 
         fileNameDisplay.textContent =
             `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+
+        removeBtn.style.display = "inline-block";
+    });
+
+    removeBtn.addEventListener("click", () => {
+        fileInput.value = "";
+        fileNameDisplay.textContent = "";
+        removeBtn.style.display = "none";
     });
 }
 
@@ -425,7 +437,6 @@ function initializeCoverages() {
             </div>
 
             <div class="coverage-fields" id="${name}-fields">
-
                 ${!isReefer ? `
                     <label>
                         Limit ($)
@@ -437,7 +448,6 @@ function initializeCoverages() {
                     Deductible ($)
                     <input type="number" name="${name} Deductible" min="0">
                 </label>
-
             </div>
         `;
 

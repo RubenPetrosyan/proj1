@@ -21,17 +21,26 @@
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_subject" value="New Truck Insurance Submission">
 
-        <!-- ================= INSURED INFO ================= -->
+        <!-- ================= GENERAL INFORMATION ================= -->
         <div class="section">
+
             <h2>General Information</h2>
 
-            <label>
-                Company Name | DBA *
-                <input name="Company Name | DBA" required>
-            </label>
+            <!-- Row 1 -->
+            <div class="form-row">
+                <label class="w-60">
+                    Company Name | DBA *
+                    <input name="Company Name | DBA" required>
+                </label>
 
-            <div class="insured-row">
+                <label class="w-40">
+                    ELD Provider
+                    <input name="ELD Provider">
+                </label>
+            </div>
 
+            <!-- Row 2 -->
+            <div class="form-row">
                 <label>
                     Phone *
                     <input name="Phone" required>
@@ -47,7 +56,7 @@
                     <input name="DOT#" required>
                 </label>
 
-                <label class="short-field">
+                <label>
                     Legal Status
                     <select name="Legal Status">
                         <option value="">Select</option>
@@ -58,37 +67,36 @@
                         <option>Individual</option>
                     </select>
                 </label>
-
-                <label class="short-field">
-                    ELD Provider
-                    <input name="ELD Provider">
-                </label>
-
             </div>
+
         </div>
 
 
         <!-- ================= ADDRESSES ================= -->
         <div class="section">
+
             <h2>Addresses</h2>
 
-            <label>
-                Mailing Address *
-                <input type="text"
-                       id="mailingAddress"
-                       name="Mailing Address"
-                       autocomplete="off"
-                       required>
-            </label>
+            <div class="form-row">
+                <label>
+                    Mailing Address *
+                    <input type="text"
+                           id="mailingAddress"
+                           name="Mailing Address"
+                           autocomplete="off"
+                           required>
+                </label>
 
-            <label>
-                Garaging Address *
-                <input type="text"
-                       id="garagingAddress"
-                       name="Garaging Address"
-                       autocomplete="off"
-                       required>
-            </label>
+                <label>
+                    Garaging Address *
+                    <input type="text"
+                           id="garagingAddress"
+                           name="Garaging Address"
+                           autocomplete="off"
+                           required>
+                </label>
+            </div>
+
         </div>
 
 
@@ -142,7 +150,7 @@
         </div>
 
 
-        <!-- ================= SUPPORTING DOCUMENT ================= -->
+        <!-- ================= FILE UPLOAD ================= -->
         <div class="section">
             <h2>Supporting Document (Optional)</h2>
 
@@ -156,10 +164,18 @@
                            accept=".pdf,.jpg,.jpeg,.png,.zip">
                 </label>
 
-                <div id="fileName" class="file-name"></div>
+                <div class="file-preview">
+                    <span id="fileName" class="file-name"></span>
+                    <button type="button"
+                            id="removeFileBtn"
+                            class="remove-file-btn"
+                            style="display:none;">
+                        Remove
+                    </button>
+                </div>
 
                 <p class="upload-note">
-                    If you have multiple documents, please merge them into a single PDF or ZIP file (maximum 25MB) before uploading. 
+                    If you have multiple documents, please merge them into a single PDF or ZIP file (maximum 10MB).
                     Any additional files that exceed this limit may be sent separately to info@50Bridges.com
                 </p>
 
@@ -179,7 +195,6 @@
         </button>
 
     </form>
-
 </div>
 
 <script src="js/script.js"></script>
