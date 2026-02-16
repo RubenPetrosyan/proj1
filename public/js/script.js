@@ -313,14 +313,15 @@ function addTrailer() {
             <input name="Trailer Make">
         </label>
 
-        <label class="w-trucktype">Type
+<label class="w-trucktype">Power Unit Type
     <select name="Truck Type">
-        <option value="">Type</option>
+        <option value="">Select Type</option>
         <option>Tractor</option>
-        <option>Box</option>
-        <option>Flatbed</option>
-        <option>Reefer</option>
-        <option>Tanker</option>
+        <option>Tractor</option>
+        <option>Box Truck</option>
+        <option>Dump Truck</option>
+        <option>Tank Truck</option>
+        <option>Tow Truck</option>
         <option>Other</option>
     </select>
 </label>
