@@ -465,7 +465,7 @@ function toggleCoverage(radio, name) {
 function validateForm(e) {
 
     const requiredFields = [
-        "Named Insured",
+        "Company Name | DBA",
         "Phone",
         "Email",
         "DOT#",
