@@ -314,15 +314,16 @@ function addTrailer() {
         </label>
 
         <label class="w-trucktype">Type
-            <select name="Trailer Type">
-                <option value="">Type</option>
-                <option>Dry Van</option>
-                <option>Reefer</option>
-                <option>Flatbed</option>
-                <option>Tanker</option>
-                <option>Other</option>
-            </select>
-        </label>
+    <select name="Truck Type">
+        <option value="">Type</option>
+        <option>Tractor</option>
+        <option>Box</option>
+        <option>Flatbed</option>
+        <option>Reefer</option>
+        <option>Tanker</option>
+        <option>Other</option>
+    </select>
+</label>
 
         <label class="w-vin">VIN
             <input name="Trailer VIN">
